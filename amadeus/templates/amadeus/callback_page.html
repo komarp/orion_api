@@ -1,0 +1,13 @@
+{% extends 'amadeus/base.html' %}
+
+
+{% block title %} No matches, Oops! {% endblock %}
+
+{% block content %}
+    <br>
+    <div class="alert alert-info" role="alert">
+        No matches, Try again!
+    </div>
+
+    <a class="btn btn-primary" href="{% url 'amadeus:patient-search' %}" role="button">Search again</a>
+{% endblock %}

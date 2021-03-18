@@ -1,0 +1,23 @@
+{% extends 'amadeus/base.html' %}
+
+
+{% block title %} PatientInfo {% endblock %}
+
+{% block content %}
+    <br>
+    <div class="col-5">
+        <div class="alert alert-primary" role="alert">
+            Patient Info
+        </div>
+        {% for k, v in patient.items %}
+            {% if k == 'address' %}
+                <strong>{{ k }}</strong>: {% for i in v %} {{ i }}, {% endfor %}
+            {% else %}
+                <strong>{{ k }}</strong>: {{ v }}<br>
+            {% endif %}
+        {% endfor %}
+        <br>
+        <a class="btn btn-primary" href="{% url 'amadeus:patient-search' %}" role="button">Search again</a>
+    </div>
+
+{% endblock %}
