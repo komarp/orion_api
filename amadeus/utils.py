@@ -1,20 +1,24 @@
 import requests
+from django.conf import settings
 
 
 class OrionHealthAPI:
 
-    def __init__(self, url, headers):
-        self.url = url
-        self.headers = headers
+    def __init__(self):
+        self._url = settings.ACCESS_TOKEN
+        self._headers = {
+            'Accept': 'application/json',
+            'Authorization': f'Bearer {settings.ACCESS_TOKEN}'
+        }
 
     def get_patient(self, surname, gender):
         response = requests.get(
-            self.url,
+            self._url,
             params={
                 'gender': gender,
                 'family': surname
             },
-            headers=self.headers)
+            headers=self._headers)
         if response.status_code == 200:
             content = response.json()
             if not content['total']:

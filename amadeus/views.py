@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.views.generic import FormView
 from .forms import RequestForm
 from .utils import OrionHealthAPI
-import orion.settings as settings
 
 # Create your views here.
 
@@ -10,17 +9,11 @@ import orion.settings as settings
 class PatientSearchView(FormView):
     form_class = RequestForm
     template_name = 'amadeus/search_patient.html'
-    headers = {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + settings.ACCESS_TOKEN
-    }
 
     def form_valid(self, form):
         gender = form.cleaned_data['gender']
         surname = form.cleaned_data['surname']
-        patient = OrionHealthAPI(
-            settings.API_URL,
-            headers=self.headers).\
+        patient = OrionHealthAPI().\
             get_patient(surname, gender)
         if patient['status'] == 'success':
             context = {'patient': patient}
