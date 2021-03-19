@@ -15,11 +15,9 @@ class PatientSearchView(FormView):
         surname = form.cleaned_data['surname']
         patient = OrionHealthAPI().\
             get_patient(surname, gender)
-        if patient['status'] == 'success':
-            context = {'patient': patient}
-            response = render(self.request, 'amadeus/patient_info.html', context)
-        elif patient['status'] == 'undefined':
-            response = render(self.request, 'amadeus/callback_page.html')
-        else:
-            response = render(self.request, 'amadeus/unsuccessful_page.html')
-        return response
+        response_dct = {
+            'success': render(self.request, 'amadeus/patient_info.html', {'patient': patient}),
+            'undefined': render(self.request, 'amadeus/callback_page.html'),
+            'unsuccessful': render(self.request, 'amadeus/unsuccessful_page.html')
+        }
+        return response_dct[patient['status']]

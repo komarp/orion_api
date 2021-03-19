@@ -5,7 +5,7 @@ from django.conf import settings
 class OrionHealthAPI:
 
     def __init__(self):
-        self._url = settings.ACCESS_TOKEN
+        self._url = settings.API_URL
         self._headers = {
             'Accept': 'application/json',
             'Authorization': f'Bearer {settings.ACCESS_TOKEN}'
