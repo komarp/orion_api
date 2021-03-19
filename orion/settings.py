@@ -120,3 +120,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+API_URL = "https://api.orionhealth.io/fhir/3.0/Patient/"
+ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
